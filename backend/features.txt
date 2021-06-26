@@ -1,0 +1,18 @@
+Mountain,https://upload.wikimedia.org/wikipedia/commons/6/6e/Monasterio_Khor_Virap%2C_Armenia%2C_2016-10-01%2C_DD_25.jpg
+Hiking,https://upload.wikimedia.org/wikipedia/commons/a/a9/Hiking_to_the_Ice_Lakes._San_Juan_National_Forest%2C_Colorado.jpg
+Beach,https://upload.wikimedia.org/wikipedia/commons/b/b4/Hyams_Beach%2C_Jervis_Bay%2C_Australia.jpg
+Historical,https://upload.wikimedia.org/wikipedia/commons/8/83/Lascar_Avenue_of_the_Dead_and_the_Pyramid_of_the_Sun_in_the_background_%284566574277%29.jpg
+Desert,https://upload.wikimedia.org/wikipedia/commons/3/34/Rub_al_Khali_002.JPG
+Festival,https://upload.wikimedia.org/wikipedia/commons/c/c2/031_Trachtenumzug_Bierwagen_Hofbraeu.JPG
+Snowfall,https://upload.wikimedia.org/wikipedia/commons/1/12/Snow-covered_fir_trees.jpg
+Park,https://upload.wikimedia.org/wikipedia/commons/b/b1/Veale_Gardens.JPG
+Lake,https://upload.wikimedia.org/wikipedia/commons/2/23/Lake_mapourika_NZ.jpeg
+Road trip,https://reisevergnuegen.com/wp-content/uploads/sites/5/2019/04/roadtrip-dino-reichmuth-680x481.jpg
+Skyscraper,https://upload.wikimedia.org/wikipedia/en/9/93/Burj_Khalifa.jpg
+Adventure sport,https://lp-cms-production.imgix.net/features/2013/06/GettyRF_83654057-0d23ef9081fb.jpg
+River,https://upload.wikimedia.org/wikipedia/commons/0/08/Porvoon_uusisilta_1.JPG
+Medieval,https://upload.wikimedia.org/wikipedia/commons/4/4d/Aachener_Dom_Pfalzkapelle_vom_M%C3%BCnsterplatz_2014.jpg
+Rainy,https://streetberlin.net/wp-content/uploads/2018/06/martin-waltz-street-photography-berlin1-2-1.jpg
+Island,https://upload.wikimedia.org/wikipedia/commons/5/58/Fernando_noronha.jpg
+Ghost,https://static.india.com/wp-content/uploads/2018/08/kundanbagh-haunted-house.jpg
+Religious,https://upload.wikimedia.org/wikipedia/commons/4/43/Sheikh_Lotfallah_Esfahan.JPG

@@ -1,0 +1,47 @@
+{
+    "places":[{
+        "id":1,
+        "place_name":"cairo"
+    },
+    {
+        "id":2,
+        "place_name":"ankara"
+    },
+	{
+		"id":3,
+        "place_name":"Everest base camp"
+	},
+	{
+		"id":4,
+        "place_name":"Goa"
+	},
+	{
+		"id":5,
+        "place_name":"new Delhi"
+	},
+	{
+		"id":6,
+        "place_name":"petra"
+	},
+	{
+		"id":7,
+        "place_name":"torna fort"
+	}
+	],
+    "features":[{
+        "id":1,
+        "feature_name":"desert"
+    },
+	{
+		"id":2,
+        "feature_name":"mountain"
+	},
+	{
+		"id":3,
+        "feature_name":"snow"
+	},
+	{
+		"id":4,
+        "feature_name":"historical"
+	}]
+}
