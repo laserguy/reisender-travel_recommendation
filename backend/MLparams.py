@@ -1,6 +1,6 @@
-DB_SERVER = "localhost"
-USER_NAME = "root"
-PASSWORD = ""
-DB_NAME = "mldatabase"
+DB_SERVER = "eu-cdbr-west-01.cleardb.com"
+USER_NAME = "b62060220441f0"
+PASSWORD = "e8a50af1"
+DB_NAME = "heroku_964fc3ff143e6d9"
 DEFAULT_FEATURE_COUNT = 5
 DEFAULT_RECOMMENDATIONS_COUNT = 8
