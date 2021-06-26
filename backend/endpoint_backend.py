@@ -8,14 +8,14 @@ datalayerbackend.init()
 @app.route("/api/users/register", methods=['POST'])
 def register():
     data = request.get_json()
-    u = datalayerbackend.register(data['username'],data['password'])
+    u = datalayerbackend.register(data['username'], data['password'])
     return jsonify(u)
 
 
 @app.route('/api/users/login', methods=['POST'])
 def login():
     data = request.get_json()
-    u = datalayerbackend.login(data['username'],data['password'])
+    u = datalayerbackend.login(data['username'], data['password'])
     return jsonify(u)
 
 
@@ -47,7 +47,7 @@ def wishlist():
         wl = datalayerbackend.wishListAdd(data['user_id'], data['place_id'])
         return jsonify(wl)
 
-    return Response(jsonify({"error": 'unknown method'}), status=400)
+    return jsonify({"error": 'unknown method'}, status=400)
 
 
 @app.route('/api/users/visited', methods=['GET', 'DELETE', 'PUT'])
@@ -67,7 +67,7 @@ def visited():
         wl = datalayerbackend.visitedListAdd(data['user_id'], data['place_id'])
         return jsonify({})
 
-    return Response(jsonify({"error": 'unknown method'}), status=400)
+    return jsonify({"error": 'unknown method'}, status=400)
 
 
 @app.route('/api/users/recommend/<user_id>', methods=['GET'])
@@ -81,6 +81,29 @@ def search():
     q = request.args.get('q')
     places = datalayerbackend.search(q)
     return jsonify(places)
+
+
+@app.route('/api/place', methods=['GET', 'POST', 'PUT'])
+def place():
+
+    if request.method == 'GET':
+        place_id = request.args['id']
+        places = datalayerbackend.getPlaces([place_id])
+        if len(places) == 1:
+            return jsonify(places[0])
+        else:
+            return jsonify({})
+
+    # create place
+    if request.method == 'POST':
+        data = request.get_json()
+        if data != None:
+            datalayerbackend.addPlace(data['name'], data['url'])
+        return jsonify({})
+
+    # update place
+    if request.method == 'PUT':
+        return jsonify({})
 
 
 if __name__ == '__main__':
