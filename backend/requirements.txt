@@ -2,7 +2,7 @@ Flask==2.0.1
 Flask-Cors==3.0.10
 Flask-RESTful==0.3.9
 pandas==1.2.5
-numpy~=1.19.2
+numpy
 PyMySQL==1.0.2
 spacy-transformers==1.0.2
 spacy-alignments==0.8.3
@@ -11,3 +11,4 @@ scikit-learn==0.24.2
 scipy==1.4.1
 spacy==3.0.6
 h5py~=2.10.0
+wikipedia
