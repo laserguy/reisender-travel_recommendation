@@ -107,7 +107,7 @@ def login(username,passwd):
 
 def getFeatureList():
     try:
-        feature_list = sqlhelper.selectAll("FeatureInfo")
+        feature_list = sqlhelper.selectAll("featureinfo")
         return [{"feature_id":row[0], "name":row[1], "image_url":row[2]} for row in feature_list]
     except Exception as e:
         return {'error': str(e)}
