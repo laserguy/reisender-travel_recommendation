@@ -85,7 +85,6 @@ def search():
 
 @app.route('/api/place', methods=['GET', 'POST', 'PUT'])
 def place():
-
     if request.method == 'GET':
         place_id = request.args['id']
         places = datalayerbackend.getPlaces([place_id])
@@ -104,6 +103,7 @@ def place():
     # update place
     if request.method == 'PUT':
         return jsonify({})
+    return jsonify({"error": 'unknown method'}, status=400)
 
 
 if __name__ == '__main__':
