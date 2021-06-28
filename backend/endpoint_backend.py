@@ -20,7 +20,7 @@ def register():
 def login():
     data = request.get_json()
     u = datalayerbackend.login(data['username'], data['password'])
-    return jsonify(u) if u else make_response(jsonify(u), 503)
+    return jsonify(u) if u else make_response(jsonify(u), 404)
 
 
 @app.route('/api/users/features', methods=['POST', 'GET'])
