@@ -2,6 +2,7 @@ import sqlhelper
 import numpy as np
 import orchestrator
 import MLparams
+import traceback
 
 def init():
     try:
@@ -40,7 +41,7 @@ def init():
         print("Could not be added")
         print(failure_dict)
     except Exception as e:
-        print(str(e))
+        print(traceback.print_exc())
         return {'error': str(e)}
 
 
@@ -77,8 +78,15 @@ def register(username,passwd):
     try:
         element_dict = {}
         element_dict['username'] = username
+
+        user_info = sqlhelper.select_mulparams(element_dict,'logininfo')
+
+        if user_info is not None:
+            return {'error': 'username taken'}
+
         element_dict['password'] = passwd
         element_dict['firstlogin'] = 0
+
         insert_dict = sqlhelper.insert("",'logininfo',element_dict)
 
         user_dict = {}
@@ -87,6 +95,7 @@ def register(username,passwd):
 
         return {'id':user_dict['user_id']}
     except Exception as e:
+        print(traceback.print_exc())
         return {'error': str(e)}
 
 def login(username,passwd):
@@ -103,6 +112,7 @@ def login(username,passwd):
 
         return user_dict
     except Exception as e:
+        print(traceback.print_exc())
         return {'error': str(e)}
 
 def getFeatureList():
@@ -110,6 +120,7 @@ def getFeatureList():
         feature_list = sqlhelper.selectAll("featureinfo")
         return [{"feature_id":row[0], "name":row[1], "image_url":row[2]} for row in feature_list]
     except Exception as e:
+        print(traceback.print_exc())
         return {'error': str(e)}
 
 def passFeatureList(user_id, features):
@@ -121,6 +132,7 @@ def passFeatureList(user_id, features):
 
         orchestrator.addUser(user_id,features)
     except Exception as e:
+        print(traceback.print_exc())
         return {'error': str(e)}
 
 def wishListAdd(user_id, place_id):
@@ -141,6 +153,7 @@ def wishListAdd(user_id, place_id):
 
         orchestrator.updateUserEmbeddings(user_id,place_id)
     except Exception as e:
+        print(traceback.print_exc())
         return {'error': str(e)}
 
 def wishListRemove(user_id, place_id):
@@ -161,6 +174,7 @@ def wishListRemove(user_id, place_id):
         element_dict['wish_list'] = wish_list
         sqlhelper.update('user_id',element_dict,'userinfo') 
     except Exception as e:
+        print(traceback.print_exc())
         return {'error': str(e)}
 
 def wishListGet(user_id):
@@ -175,6 +189,7 @@ def wishListGet(user_id):
 
         return getPlaces(wish_list)
     except Exception as e:
+        print(traceback.print_exc())
         return {'error': str(e)}
 
 def visitedListAdd(user_id, place_id):
@@ -193,6 +208,7 @@ def visitedListAdd(user_id, place_id):
         element_dict['visited_list'] = visited_list
         sqlhelper.update('user_id',element_dict,'userinfo') 
     except Exception as e:
+        print(traceback.print_exc())
         return {'error': str(e)}
 
 def visitedListRemove(user_id, place_id):
@@ -214,6 +230,7 @@ def visitedListRemove(user_id, place_id):
         element_dict['visited_list'] = visited_list
         sqlhelper.update('user_id',element_dict,'userinfo') 
     except Exception as e:
+        print(traceback.print_exc())
         return {'error': str(e)}
 
 def visitedListGet(user_id):
@@ -229,6 +246,7 @@ def visitedListGet(user_id):
         return getPlaces(visited_list)
 
     except Exception as e:
+        print(traceback.print_exc())
         return {'error': str(e)}
 
 def recommend(user_id):
@@ -255,13 +273,13 @@ def recommend(user_id):
     
         return recommendations_dict
     except Exception as e:
+        print(traceback.print_exc())
         return {'error': str(e)}
 
 def search(query):
     try:
-        places_dict = {}
         place_info = sqlhelper.select_like('name','placeinfo',query)
         return [{"place_id":row[0], "name":row[1], "image_url":row[2]} for row in place_info]
-        return places_dict
     except Exception as e:
+        print(traceback.print_exc())
         return {'error': str(e)}  
