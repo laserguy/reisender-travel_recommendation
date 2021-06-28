@@ -158,6 +158,7 @@ def wishListAdd(user_id, place_id):
 def wishListRemove(user_id, place_id):
     try:
         user_info = sqlhelper.select(user_id, 'user_id', 'userinfo')
+        wish_list = ""
         for row in user_info:
             wish_list = row[2]
 
@@ -166,8 +167,6 @@ def wishListRemove(user_id, place_id):
             index = wish_list.index(str(place_id))
             del wish_list[index]
             wish_list = ','.join(wish_list)
-        else:
-            wish_list = ""
         element_dict = {}
         element_dict['user_id'] = user_id
         element_dict['wish_list'] = wish_list
@@ -215,6 +214,7 @@ def visitedListAdd(user_id, place_id):
 def visitedListRemove(user_id, place_id):
     try:
         user_info = sqlhelper.select(user_id, 'user_id', 'userinfo')
+        visited_list = ""
         for row in user_info:
             visited_list = row[1]
 
@@ -223,8 +223,7 @@ def visitedListRemove(user_id, place_id):
             index = visited_list.index(str(place_id))
             del visited_list[index]
             visited_list = ','.join(visited_list)
-        else:
-            visited_list = ""
+            
 
         element_dict = {}
         element_dict['user_id'] = user_id
