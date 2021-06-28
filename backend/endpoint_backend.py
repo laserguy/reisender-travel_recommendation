@@ -1,5 +1,6 @@
 from flask.wrappers import Response
 import datalayerbackend
+import orchestrator
 from flask import Flask, request, jsonify, make_response
 
 app = Flask(__name__)
@@ -87,7 +88,7 @@ def search():
     return jsonify(places)
 
 
-@app.route('/api/place', methods=['GET', 'POST', 'PUT'])
+@app.route('/api/places', methods=['GET', 'POST', 'PUT'])
 def place():
     if request.method == 'GET':
         place_id = request.args['id']
@@ -101,10 +102,26 @@ def place():
     if request.method == 'POST':
         data = request.get_json()
         if data != None:
-            datalayerbackend.addPlace(data['name'], data['url'])
+            place = datalayerbackend.addPlace(data['name'], data['url'])
+            orchestrator.addPlace(place[0], place[1])
         return jsonify({})
 
     # update place
+    if request.method == 'PUT':
+        return jsonify({})
+    return make_response(jsonify({"error": 'unknown method'}), 503)
+
+@app.route('/api/features', methods=['POST', 'PUT'])
+def feature():
+    # create feature
+    if request.method == 'POST':
+        data = request.get_json()
+        if data != None:
+            feat = datalayerbackend.addFeature(data['name'], data['url'])
+            orchestrator.addFeature(feat[0], feat[1])
+        return jsonify({})
+
+    # update feat
     if request.method == 'PUT':
         return jsonify({})
     return make_response(jsonify({"error": 'unknown method'}), 503)
