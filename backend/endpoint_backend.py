@@ -9,6 +9,10 @@ datalayerbackend.init()
 def register():
     data = request.get_json()
     u = datalayerbackend.register(data['username'], data['password'])
+    if 'error' in u:
+        if u['error']=='username taken':
+            return jsonify(u, status=409)
+        return jsonify(u, status=503)
     return jsonify(u)
 
 
@@ -16,7 +20,7 @@ def register():
 def login():
     data = request.get_json()
     u = datalayerbackend.login(data['username'], data['password'])
-    return jsonify(u)
+    return jsonify(u) if u else jsonify(u, status=404) 
 
 
 @app.route('/api/users/features', methods=['POST', 'GET'])
