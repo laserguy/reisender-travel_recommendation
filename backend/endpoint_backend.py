@@ -11,8 +11,8 @@ def register():
     u = datalayerbackend.register(data['username'], data['password'])
     if 'error' in u:
         if u['error']=='username taken':
-            return jsonify(u, status=409)
-        return jsonify(u, status=503)
+            return Response(u, status=409)
+        return Response(u, status=503)
     return jsonify(u)
 
 
@@ -20,7 +20,7 @@ def register():
 def login():
     data = request.get_json()
     u = datalayerbackend.login(data['username'], data['password'])
-    return jsonify(u) if u else jsonify(u, status=404) 
+    return jsonify(u) if u else Response(u, status=404) 
 
 
 @app.route('/api/users/features', methods=['POST', 'GET'])
@@ -51,7 +51,7 @@ def wishlist():
         wl = datalayerbackend.wishListAdd(data['user_id'], data['place_id'])
         return jsonify(wl)
 
-    return jsonify({"error": 'unknown method'}, status=400)
+    return Response({"error": 'unknown method'}, status=400)
 
 
 @app.route('/api/users/visited', methods=['GET', 'DELETE', 'PUT'])
@@ -71,7 +71,7 @@ def visited():
         wl = datalayerbackend.visitedListAdd(data['user_id'], data['place_id'])
         return jsonify({})
 
-    return jsonify({"error": 'unknown method'}, status=400)
+    return Response({"error": 'unknown method'}, status=400)
 
 
 @app.route('/api/users/recommend/<user_id>', methods=['GET'])
