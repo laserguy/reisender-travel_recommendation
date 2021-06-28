@@ -55,7 +55,6 @@ def addFeature(feature_name,feature_url):
     except Exception as e:
         return {'error': str(e)}
 
-
 def addPlace(place_name,place_url):
     try:
         place_dict = {}
@@ -179,11 +178,13 @@ def wishListRemove(user_id, place_id):
 
 def wishListGet(user_id):
     try:
-        places_dict = {}
         user_info = sqlhelper.select(user_id, 'user_id', 'userinfo')
         for row in user_info:
             wish_list = row[2]       
         
+        if wish_list == None:
+            return []
+
         wish_list = list(wish_list.split(','))
         wish_list = list(map(int, wish_list))
 
@@ -235,11 +236,13 @@ def visitedListRemove(user_id, place_id):
 
 def visitedListGet(user_id):
     try:
-        places_dict = {}
         user_info = sqlhelper.select(user_id, 'user_id', 'userinfo')
         for row in user_info:
-            visited_list = row[1]       
+            visited_list = row[1]      
         
+        if visited_list == None:
+            return []
+
         visited_list = list(visited_list.split(','))
         visited_list = list(map(int, visited_list))
 
