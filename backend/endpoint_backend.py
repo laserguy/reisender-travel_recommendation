@@ -1,6 +1,6 @@
 from flask.wrappers import Response
 import datalayerbackend
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, make_response
 
 app = Flask(__name__)
 datalayerbackend.init()
@@ -11,8 +11,8 @@ def register():
     u = datalayerbackend.register(data['username'], data['password'])
     if 'error' in u:
         if u['error']=='username taken':
-            return Response(u, status=409)
-        return Response(u, status=503)
+            return make_response(jsonify(u), 409)
+        return make_response(jsonify(u), 503)
     return jsonify(u)
 
 
@@ -20,7 +20,7 @@ def register():
 def login():
     data = request.get_json()
     u = datalayerbackend.login(data['username'], data['password'])
-    return jsonify(u) if u else Response(u, status=404) 
+    return jsonify(u) if u else make_response(jsonify(u), 503)
 
 
 @app.route('/api/users/features', methods=['POST', 'GET'])
@@ -51,7 +51,7 @@ def wishlist():
         wl = datalayerbackend.wishListAdd(data['user_id'], data['place_id'])
         return jsonify(wl)
 
-    return Response({"error": 'unknown method'}, status=400)
+    return make_response(jsonify({"error": 'unknown method'}), 503)
 
 
 @app.route('/api/users/visited', methods=['GET', 'DELETE', 'PUT'])
@@ -71,7 +71,7 @@ def visited():
         wl = datalayerbackend.visitedListAdd(data['user_id'], data['place_id'])
         return jsonify({})
 
-    return Response({"error": 'unknown method'}, status=400)
+    return make_response(jsonify({"error": 'unknown method'}), 503)
 
 
 @app.route('/api/users/recommend/<user_id>', methods=['GET'])
@@ -107,7 +107,7 @@ def place():
     # update place
     if request.method == 'PUT':
         return jsonify({})
-    return jsonify({"error": 'unknown method'}, status=400)
+    return make_response(jsonify({"error": 'unknown method'}), 503)
 
 
 if __name__ == '__main__':
