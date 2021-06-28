@@ -80,7 +80,7 @@ def register(username,passwd):
 
         user_info = sqlhelper.select_mulparams(element_dict,'logininfo')
 
-        if not user_info:
+        if user_info:
             return {'error': 'username taken'}
 
         element_dict['password'] = passwd
