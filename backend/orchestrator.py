@@ -34,12 +34,15 @@ def getRecommendations(user_id, visited_places, count):
 def updateUserEmbeddings(user_id, place_id):
     try:
         user_info = datalayer.getUser(user_id)
-        user_vector = user_info['word_vector']
+        wish_vector = user_info['wish_vector']
         avg_num = user_info['avg_num']
         place_vector = datalayer.getPlace(place_id)
         Embedder = wordembeddings.WordEmbedder.getInstance()
 
-        wish_embedding = Embedder.updateUserEmbeddings(avg_num, user_vector, place_vector)
+        if wish_vector.size == 1:
+            wish_embedding = place_vector
+        else:
+            wish_embedding = Embedder.updateUserEmbeddings(avg_num, wish_vector, place_vector)
         datalayer.updateUser(user_id, avg_num, wish_embedding)
     except Exception as e:
         return {'error': str(e)}
