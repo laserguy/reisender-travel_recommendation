@@ -80,6 +80,7 @@ def addPlace(place_id, place_name):
         Embedder = wordembeddings.WordEmbedder.getInstance()
         place_embedding = Embedder.calcPlaceEmbedding(place_name)
         datalayer.addPlace(place_id, place_embedding)
+        return {'success': True}
     except Exception as e:
         return {'error': str(e)}
 

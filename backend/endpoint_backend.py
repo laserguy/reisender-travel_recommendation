@@ -103,8 +103,11 @@ def place():
         data = request.get_json()
         if data != None:
             place = datalayerbackend.addPlace(data['name'], data['url'])
-            orchestrator.addPlace(place[0], place[1])
-        return jsonify({})
+            if "error" in place:
+                return make_response(jsonify(place), 501)
+            pe = orchestrator.addPlace(place[0], place[1])
+            return jsonify(place) if "error" not in pe else make_response(jsonify(pe), 504)
+        return make_response(jsonify({}), 502)
 
     # update place
     if request.method == 'PUT':

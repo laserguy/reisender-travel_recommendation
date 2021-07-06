@@ -1,4 +1,3 @@
-import wikipedia
 import nlp_helper
 import spacy
 import numpy as np
@@ -47,11 +46,8 @@ class WordEmbedder:
                 print(place)
                 # TODO: Check using the .summary API as well
                 try:
-                    place_info = wikipedia.page(place).content
-                except wikipedia.DisambiguationError as e:
-                    failure_dict[place_id] = place
-                    continue
-                except wikipedia.PageError as e:
+                    place_info = nlp_helper.wiki_desc(place)
+                except Exception as e:
                     failure_dict[place_id] = place
                     continue
 
@@ -66,11 +62,8 @@ class WordEmbedder:
                 print(feature)
                 # TODO: Check using the .summary API as well
                 try:
-                    feature_info = wikipedia.page(feature).content
-                except wikipedia.DisambiguationError as e:
-                    failure_dict[feature_id] = feature
-                    continue
-                except wikipedia.PageError as e:
+                    feature_info = nlp_helper.wiki_desc(feature)
+                except Exception as e:
                     failure_dict[feature_id] = feature
                     continue
                 
@@ -108,7 +101,7 @@ class WordEmbedder:
     def calcFeatureEmbedding(self, feature_name):
         try:
             # TODO: Check using the .summary API as well 
-            feature_info = wikipedia.page(feature_name).content
+            feature_info = nlp_helper.wiki_desc(feature_name)
             feature_embedding = nlp_helper.createTextVector(feature_info, self.language_model)
             return feature_embedding
         except Exception as e:
@@ -117,7 +110,7 @@ class WordEmbedder:
     def calcPlaceEmbedding(self, place_name):
         try:
             # TODO: Check using the .summary API as well 
-            place_info = wikipedia.page(place_name).content
+            place_info = nlp_helper.wiki_desc(place_name)
             place_embedding = nlp_helper.createTextVector(place_info, self.language_model)
             return place_embedding
         except Exception as e:
